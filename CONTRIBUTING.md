@@ -65,6 +65,7 @@ alone.
 | Path | Description |
 |---|---|
 | `public/` | the plugin as it is shipped to wordpress.org |
+| `plugin.php` | dev wrapper loading `public/`, for local testing only |
 | `bin/` | release helper scripts |
 | `.github/workflows/` | CI/CD |
 

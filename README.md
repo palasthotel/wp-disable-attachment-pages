@@ -28,6 +28,7 @@ permalink cannot send visitors off-site.
 | Path | Description |
 |---|---|
 | `public/` | the plugin as it is shipped to wordpress.org |
+| `plugin.php` | dev wrapper: a second plugin entry named "… - DEV" that loads `public/`, so the repository can be dropped into `wp-content/plugins/` as is |
 | `bin/` | release helper scripts |
 | `.github/workflows/` | CI/CD — see [.github/WORKFLOWS.md](.github/WORKFLOWS.md) |
 
@@ -35,9 +36,13 @@ Only `public/` is shipped. Everything outside it stays repository-only.
 
 ## Development
 
-The plugin is a single PHP file with no build step. Point a local WordPress at
-`public/` — for example by symlinking it into `wp-content/plugins/` — or install
-the packed zip:
+The plugin is a single PHP file with no build step. For testing, symlink or
+clone the whole repository into `wp-content/plugins/` and activate
+**Disable Attachment Pages - DEV**: the wrapper `plugin.php` loads the real
+plugin from `public/`, so what you test is the shipped code, with the
+repository still being a git checkout.
+
+To build the distributable zip:
 
 ```sh
 bash bin/pack.sh   # → disable-attachment-pages.zip

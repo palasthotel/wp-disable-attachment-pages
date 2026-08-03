@@ -125,11 +125,15 @@ Tag: v1.1.1
       │
       └── SVN commit
               rm trunk/*  +  rm tags/$VERSION
-              cp public/* → trunk/  +  tags/$VERSION/
+              rsync -rL public/ → trunk/  →  tags/$VERSION/
               svn add --force .
               svn rm deleted files
               svn commit "Release version $VERSION"
 ```
+
+`rsync -rL` rather than `cp -r` because `cp` is platform-dependent — GNU `cp`
+keeps symlinks while descending a directory, BSD `cp` resolves them — and SVN
+refuses a commit that puts a symlink where it versions a regular file.
 
 ---
 

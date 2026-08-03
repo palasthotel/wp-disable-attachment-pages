@@ -1,7 +1,7 @@
 === Disable Attachment Pages ===
 Contributors: palasthotel, greatestview, janaeggebrecht
 Donate link: https://palasthotel.de/
-Tags: redirect, attachments, attachment, images
+Tags: redirect, attachments, attachment, images, seo
 Requires at least: 4.0
 Tested up to: 7.0.2
 Requires PHP: 7.0

@@ -5,7 +5,7 @@ Tags: redirect, attachments, attachment, images
 Requires at least: 4.0
 Tested up to: 7.0.2
 Requires PHP: 7.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,6 +22,10 @@ Further, when editing a post, the option to link images to their attachment page
 3. You’re done! Try following an attachment link, the browser should redirect back to the post, where this link is placed.
 
 == Changelog ==
+
+= 1.1.1 =
+**Bug Fixes**
+* only redirect to a parent a visitor can actually reach (213b013)
 
 = 1.1 =
 * Added Gutenberg support.

@@ -5,8 +5,9 @@
  * Description:       Redirects attachment pages to the post, where they are placed, and hides backend option to link images to attachment page (if not default).
  * Version:           1.1.1
  * Requires at least: 4.0
+ * Tested up to:      7.1.2
  * Requires PHP:      7.0
- * Author:            Palasthotel <rezeption@palasthotel.de> (Kim-Christian Meyer)
+ * Author:            Palasthotel <webmaster@palasthotel.de>
  * Author URI:        https://palasthotel.de
  * License:           GPL-3.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html

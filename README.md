@@ -28,20 +28,35 @@ permalink cannot send visitors off-site.
 | Path | Description |
 |---|---|
 | `public/` | the plugin as it is shipped to wordpress.org |
-| `bin/` | release helper scripts |
+| `plugin.php` | dev wrapper: a second plugin entry named "… - DEV" that loads `public/`, so the repository can be dropped into `wp-content/plugins/` as is |
 | `.github/workflows/` | CI/CD — see [.github/WORKFLOWS.md](.github/WORKFLOWS.md) |
 
 Only `public/` is shipped. Everything outside it stays repository-only.
 
 ## Development
 
-The plugin is a single PHP file with no build step. Point a local WordPress at
-`public/` — for example by symlinking it into `wp-content/plugins/` — or install
-the packed zip:
+The plugin is a single PHP file with no build step. For testing, symlink or
+clone the whole repository into `wp-content/plugins/` and activate
+**Disable Attachment Pages - DEV**: the wrapper `plugin.php` loads the real
+plugin from `public/`, so what you test is the shipped code, with the
+repository still being a git checkout.
+
+With wp-env, which mounts the repository as the plugin and needs no configuration
+file:
 
 ```sh
-bash bin/pack.sh   # → disable-attachment-pages.zip
+npx @wordpress/env start      # http://localhost:8888, admin / password
 ```
+
+The packed zip and the PR checks are described in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## WordPress 6.4 and later
+
+WordPress 6.4 added the option `wp_attachment_pages_enabled`: off on new sites, on for
+sites that existed before. When it is off, core redirects an attachment page to the
+media file itself. This plugin hooks in earlier (`template_redirect`, priority 1, before
+`redirect_canonical`) and redirects to the parent post instead, regardless of that
+option.
 
 ## Releasing
 

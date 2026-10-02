@@ -65,23 +65,39 @@ alone.
 | Path | Description |
 |---|---|
 | `public/` | the plugin as it is shipped to wordpress.org |
-| `plugin.php` | dev wrapper loading `public/`, for local testing only |
-| `bin/` | release helper scripts |
+| `public/disable-attachment-pages.php` | main file: the redirect and the admin CSS |
+| `public/readme.txt` | the wordpress.org listing |
+| `plugin.php` | development wrapper loading `public/`, for local testing only; never deployed |
+| `version.txt` | the version release-please maintains |
 | `.github/workflows/` | CI/CD |
 
 Only `public/` is shipped. Everything outside it stays repository-only.
 
+The main file `public/disable-attachment-pages.php` must keep its name. WordPress
+identifies an installed plugin by `<directory>/<main file>` and stores that pair in
+`active_plugins`; renaming it deactivates the plugin on every site at the next update.
+
 ## Local environment
 
-The plugin has no build step. To produce the distributable zip:
+There is nothing to build or install. wp-env runs without a configuration file and
+mounts the repository as the plugin through the development wrapper:
 
 ```sh
-bash bin/pack.sh   # → disable-attachment-pages.zip
+npx @wordpress/env start      # http://localhost:8888, admin / password
+```
+
+To produce the distributable zip, with
+[palasthotel/github-workflows](https://github.com/palasthotel/github-workflows) checked
+out next to this repository:
+
+```sh
+SLUG=disable-attachment-pages bash ../github-workflows/wp-plugin/bin/pack.sh
+# → build/disable-attachment-pages/ and disable-attachment-pages.zip
 ```
 
 ## Checks
 
-Every PR runs `php -l` against PHP 7.4, 8.2, 8.3 and 8.4, and packs the plugin
-once. The plugin declares `Requires PHP: 7.0`, so avoid syntax newer than that
+Every PR runs `php -l` against PHP 7.4, 8.2, 8.3 and 8.4, packs the plugin and checks
+the payload, and checks the version carriers agree. The plugin declares `Requires PHP: 7.0`, so avoid syntax newer than that
 unless you raise the requirement in the plugin header and `public/readme.txt` in
 the same PR.

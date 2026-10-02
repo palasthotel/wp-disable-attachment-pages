@@ -29,7 +29,6 @@ permalink cannot send visitors off-site.
 |---|---|
 | `public/` | the plugin as it is shipped to wordpress.org |
 | `plugin.php` | dev wrapper: a second plugin entry named "… - DEV" that loads `public/`, so the repository can be dropped into `wp-content/plugins/` as is |
-| `bin/` | release helper scripts |
 | `.github/workflows/` | CI/CD — see [.github/WORKFLOWS.md](.github/WORKFLOWS.md) |
 
 Only `public/` is shipped. Everything outside it stays repository-only.
@@ -42,11 +41,22 @@ clone the whole repository into `wp-content/plugins/` and activate
 plugin from `public/`, so what you test is the shipped code, with the
 repository still being a git checkout.
 
-To build the distributable zip:
+With wp-env, which mounts the repository as the plugin and needs no configuration
+file:
 
 ```sh
-bash bin/pack.sh   # → disable-attachment-pages.zip
+npx @wordpress/env start      # http://localhost:8888, admin / password
 ```
+
+The packed zip and the PR checks are described in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## WordPress 6.4 and later
+
+WordPress 6.4 added the option `wp_attachment_pages_enabled`: off on new sites, on for
+sites that existed before. When it is off, core redirects an attachment page to the
+media file itself. This plugin hooks in earlier (`template_redirect`, priority 1, before
+`redirect_canonical`) and redirects to the parent post instead, regardless of that
+option.
 
 ## Releasing
 

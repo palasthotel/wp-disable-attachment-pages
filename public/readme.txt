@@ -3,7 +3,7 @@ Contributors: palasthotel, greatestview, janaeggebrecht
 Donate link: https://palasthotel.de/
 Tags: redirect, attachments, attachment, images, seo
 Requires at least: 4.0
-Tested up to: 7.1.2
+Tested up to: 7.1
 Requires PHP: 7.0
 Stable tag: 1.1.1
 License: GPL-3.0-or-later

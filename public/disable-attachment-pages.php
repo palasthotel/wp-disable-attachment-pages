@@ -3,7 +3,7 @@
  * Plugin Name:       Disable Attachment Pages
  * Plugin URI:        https://wordpress.org/plugins/disable-attachment-pages/
  * Description:       Redirects attachment pages to the post, where they are placed, and hides backend option to link images to attachment page (if not default).
- * Version:           1.1.1
+ * Version:           2.0.0
  * Requires at least: 4.0
  * Requires PHP:      8.0
  * Author:            Palasthotel <webmaster@palasthotel.de>

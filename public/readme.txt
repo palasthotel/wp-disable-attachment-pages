@@ -5,7 +5,7 @@ Tags: redirect, attachments, attachment, images, seo
 Requires at least: 4.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.1.1
+Stable tag: 2.0.0
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,6 +27,13 @@ Further, when editing a post, the option to link images to their attachment page
 Since WordPress 6.4, new sites have attachment pages switched off (option `wp_attachment_pages_enabled`), and their URLs redirect to the media file itself. Sites that existed before keep their attachment pages. This plugin redirects to the post or page the file belongs to instead, on old and new sites alike, and hides the option to link images to their attachment page. If a redirect to the file is what you want, you do not need it.
 
 == Changelog ==
+
+= 2.0.0 =
+**⚠ BREAKING CHANGES**
+* requires PHP 8.0 or newer
+
+**Features**
+* drop support for PHP 7 (d7a2bc5)
 
 = 1.1.1 =
 **Bug Fixes**
